@@ -8,14 +8,10 @@ public class DisplayActivity extends AppCompatActivity {
 
     public static final String JOKE_TEXT = "com.udacity.gradle.androidjokedisplay.JOKE_TEXT";
 
- //   @BindView(R.id.textJoke) TextView textJoke;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
-
-//        ButterKnife.bind(this);
         TextView textJoke = (TextView)findViewById(R.id.textJoke);
 
         String joke = getIntent().getStringExtra(JOKE_TEXT);
