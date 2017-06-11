@@ -1,19 +1,14 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
-import com.udacity.gradle.androidjokedisplay.DisplayActivity;
-import com.udacity.gradle.javajokes.Jokes;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private Jokes jokes;
+  //  private Jokes jokes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // instantiate the java jokes library
-        jokes = new Jokes();
+  //      jokes = new Jokes();
     }
 
 
@@ -46,12 +41,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void tellJoke(View view) {
-        Intent myIntent = new Intent(this, DisplayActivity.class);
-        myIntent.putExtra(DisplayActivity.JOKE_TEXT,jokes.getJoke());
-        startActivity(myIntent);
-    }
-
-
 }
