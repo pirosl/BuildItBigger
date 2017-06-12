@@ -11,7 +11,9 @@ import com.udacity.gradle.backend.myApi.MyApi;
 import java.io.IOException;
 
 /**
- * Created by lucian on 11/06/2017.
+ * AsyncTask class used to get beans from CGE Backend service
+ *
+ * @author Lucian Piros
  */
 class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;

@@ -5,18 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * App main class
+ *
+ * @autor
+ */
 public class MainActivity extends AppCompatActivity {
-
-  //  private Jokes jokes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // instantiate the java jokes library
-  //      jokes = new Jokes();
     }
 
 

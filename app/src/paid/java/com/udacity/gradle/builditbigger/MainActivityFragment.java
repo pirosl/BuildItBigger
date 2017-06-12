@@ -10,9 +10,11 @@ import android.widget.Button;
 
 import com.udacity.gradle.androidjokedisplay.DisplayActivity;
 
-
 /**
- * A placeholder fragment containing a simple view.
+ * Fragment containg a simple view
+ * Paid version doesn't contain ads
+ *
+ * @author Lucian Piros
  */
 public class MainActivityFragment extends Fragment implements OnTaskCompleted {
 

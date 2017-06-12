@@ -14,7 +14,10 @@ import com.udacity.gradle.androidjokedisplay.DisplayActivity;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * Fragment containg a simple view
+ * Paid version contains ads
+ *
+ * @author Lucian Piros
  */
 public class MainActivityFragment extends Fragment implements OnTaskCompleted {
 

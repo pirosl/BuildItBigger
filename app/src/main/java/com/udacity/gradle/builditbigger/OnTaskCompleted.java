@@ -1,9 +1,11 @@
 package com.udacity.gradle.builditbigger;
 
-/**
- * Created by lucian on 11/06/2017.
- */
 
+/**
+ * Interface defining method to be called when GCE call returns
+ *
+ * @author Lucian Piros
+ */
 public interface OnTaskCompleted {
     void onTaskCompleted(String result);
 }
