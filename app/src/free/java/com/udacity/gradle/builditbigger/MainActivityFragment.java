@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.udacity.gradle.androidjokedisplay.DisplayActivity;
+
+import java.util.Random;
 
 
 /**
@@ -20,6 +24,10 @@ import com.udacity.gradle.androidjokedisplay.DisplayActivity;
  * @author Lucian Piros
  */
 public class MainActivityFragment extends Fragment implements OnTaskCompleted {
+
+    private InterstitialAd mInterstitialAd;
+    private String mJoke;
+    private boolean mAddOnScreen;
 
     public MainActivityFragment() {
     }
@@ -40,11 +48,36 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
 
         Button tellJokeBtn = (Button)root.findViewById(R.id.tell_joke_btn);
 
+        final Random random = new Random();
+
         tellJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startAsyncTask();
+                // only display randomly every the add every second tap
+                int r = 1 + random.nextInt(2);
+                if (mInterstitialAd.isLoaded() && r % 2 == 0) {
+                    mInterstitialAd.show();
+                    mAddOnScreen = true;
+                }
             }
+        });
+
+        mAddOnScreen = false;
+
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                mAddOnScreen = false;
+                showJokeActivity();
+            }
+
         });
 
         return root;
@@ -53,12 +86,22 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
     void startAsyncTask() {
         EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(this);
         endpointsAsyncTask.execute();
+        mJoke = null;
     }
 
     @Override
     public void onTaskCompleted(String result) {
-        Intent myIntent = new Intent(getActivity(), DisplayActivity.class);
-        myIntent.putExtra(DisplayActivity.JOKE_TEXT,result/*jokes.getJoke()*/);
-        startActivity(myIntent);
+        mJoke = result;
+        showJokeActivity();
+    }
+
+    private void showJokeActivity() {
+        if(!mAddOnScreen) {
+            if(mJoke != null) {
+                Intent myIntent = new Intent(getActivity(), DisplayActivity.class);
+                myIntent.putExtra(DisplayActivity.JOKE_TEXT,mJoke);
+                startActivity(myIntent);
+            }
+        }
     }
 }
