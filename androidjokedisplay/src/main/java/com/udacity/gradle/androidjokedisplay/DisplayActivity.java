@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+/**
+ * Simple activity displaying a text
+ *
+ * @author Lucian Piros
+ */
 public class DisplayActivity extends AppCompatActivity {
 
     public static final String JOKE_TEXT = "com.udacity.gradle.androidjokedisplay.JOKE_TEXT";
