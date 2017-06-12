@@ -22,6 +22,15 @@ android {
     buildTypes.each {
         it.buildConfigField "String", "GCE_IP_ADDRESS", GCE_IP_ADDRESS
     }
+
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.flavors.free"
+        }
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.flavors.paid"
+        }
+    }
 }
 
 dependencies {
