@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.udacity.gradle.androidjokedisplay.DisplayActivity;
 
@@ -17,6 +18,8 @@ import com.udacity.gradle.androidjokedisplay.DisplayActivity;
  * @author Lucian Piros
  */
 public class MainActivityFragment extends Fragment implements OnTaskCompleted {
+
+    private ProgressBar mProgressBar;
 
     public MainActivityFragment() {
     }
@@ -31,9 +34,12 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
         tellJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(ProgressBar.VISIBLE);
                 startAsyncTask();
             }
         });
+
+        mProgressBar = (ProgressBar)root.findViewById(R.id.pb_loading);
 
         return root;
     }
@@ -45,6 +51,7 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
 
     @Override
     public void onTaskCompleted(String result) {
+        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
         Intent myIntent = new Intent(getActivity(), DisplayActivity.class);
         myIntent.putExtra(DisplayActivity.JOKE_TEXT,result/*jokes.getJoke()*/);
         startActivity(myIntent);

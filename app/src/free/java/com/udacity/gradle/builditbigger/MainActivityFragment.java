@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -26,6 +27,7 @@ import java.util.Random;
 public class MainActivityFragment extends Fragment implements OnTaskCompleted {
 
     private InterstitialAd mInterstitialAd;
+    private ProgressBar mProgressBar;
     private String mJoke;
     private boolean mAddOnScreen;
 
@@ -53,6 +55,7 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
         tellJokeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(ProgressBar.VISIBLE);
                 startAsyncTask();
                 // only display randomly every the add every second tap
                 int r = 1 + random.nextInt(2);
@@ -62,6 +65,9 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
                 }
             }
         });
+
+
+        mProgressBar = (ProgressBar)root.findViewById(R.id.pb_loading);
 
         mAddOnScreen = false;
 
@@ -98,6 +104,7 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
     private void showJokeActivity() {
         if(!mAddOnScreen) {
             if(mJoke != null) {
+                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 Intent myIntent = new Intent(getActivity(), DisplayActivity.class);
                 myIntent.putExtra(DisplayActivity.JOKE_TEXT,mJoke);
                 startActivity(myIntent);
